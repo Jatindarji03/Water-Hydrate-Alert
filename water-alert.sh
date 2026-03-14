@@ -1,7 +1,8 @@
 #!/bin/bash
 
-export DISPLAY=$(who | grep -m1 '(:' | grep -oP '\(:\K[^)]+' | head -1)
-export DISPLAY=${DISPLAY:-:0}
+# Auto-detect display
+export DISPLAY=$(who | awk '/\(:[0-9]/ {match($0, /\(:[0-9]+\)/, a); gsub(/[()]/,"",a[0]); print a[0]; exit}')
+export DISPLAY=${DISPLAY:-:1}
 export XAUTHORITY=$HOME/.Xauthority
 export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
 
