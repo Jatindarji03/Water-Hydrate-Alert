@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Auto-detect display
-export DISPLAY=$(who | awk '/\(:[0-9]/ {match($0, /\(:[0-9]+\)/, a); gsub(/[()]/,"",a[0]); print a[0]; exit}')
-export DISPLAY=${DISPLAY:-:1}
-export XAUTHORITY=$HOME/.Xauthority
-export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
-
 MESSAGES=(
     "Time to drink water! Stay hydrated. 💧"
     "Hydration check! Grab a glass of water. 🥤"

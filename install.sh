@@ -40,7 +40,7 @@ fi
 
 echo ""
 
-#  Install zenity ----
+# ----  Install zenity ----
 echo -e "  ${YELLOW}[1/4]${RESET} Checking zenity..."
 
 if command -v zenity &>/dev/null; then
@@ -63,7 +63,7 @@ else
     echo -e "        ${GREEN}✓ zenity installed${RESET}"
 fi
 
-#  Download alert script ----
+# ----  Download alert script ----
 echo -e "  ${YELLOW}[2/4]${RESET} Installing alert script..."
 
 mkdir -p ~/.local/bin
@@ -72,7 +72,7 @@ chmod +x ~/.local/bin/water-alert.sh
 
 echo -e "        ${GREEN}✓ Script saved to ~/.local/bin/water-alert.sh${RESET}"
 
-#  Create systemd service & timer ----
+# ----  Create systemd service & timer ----
 echo -e "  ${YELLOW}[3/4]${RESET} Setting up systemd timer..."
 
 mkdir -p ~/.config/systemd/user
@@ -84,6 +84,7 @@ Description=Water Hydrate Alert
 [Service]
 Type=oneshot
 ExecStart=%h/.local/bin/water-alert.sh
+PassEnvironment=DISPLAY DBUS_SESSION_BUS_ADDRESS XAUTHORITY
 SEOF
 
 cat > ~/.config/systemd/user/water-alert.timer << SEOF
