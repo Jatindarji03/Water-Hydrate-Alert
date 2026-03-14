@@ -1,7 +1,8 @@
 #!/bin/bash
 
-
-export DISPLAY=:0
+export DISPLAY=$(who | grep -m1 '(:' | grep -oP '\(:\K[^)]+' | head -1)
+export DISPLAY=${DISPLAY:-:0}
+export XAUTHORITY=$HOME/.Xauthority
 export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
 
 MESSAGES=(
